@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Апелляция</title>
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header>
+<div class="header-container">
+  <div class="logo">
+    <img src="img/logo.png">
+    <span>Вячеслав Игнатьев</span>
+  </div>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="courses.html">Курсы</a>
+    <a href="olympiads.html">Олимпиады</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="appeal.html">Апелляция</a>
+  </nav>
+</div>
+</header>
+
+<main>
+
+<section class="appeal">
+
+<h1>Помощь при апелляции олимпиад</h1>
+<p class="appeal-sub">Нахождение недоставленных баллов, оформление заявлений, полное сопровождение с нуля баллов до фула! 
+    Для того, чтобы мы могли Вам помочь, пожалуйста, опишите ситуацию подробно и прикрепите материалы:</p>
+
+<div class="appeal-box" id="formBox">
+
+<textarea placeholder="Название олимпиады, номер задачи, где недодали баллы, ваше решение..."></textarea>
+
+<label class="file-btn">
+📎 Прикрепить файлы
+<input type="file" id="fileInput" multiple hidden>
+</label>
+
+<div class="file-list" id="fileList"></div>
+
+<button class="send-btn" onclick="submitAppeal()">Отправить</button>
+
+</div>
+
+<div class="loader hidden" id="loader"></div>
+
+<div class="roulette hidden" id="roulette">
+
+<div class="prism-wrapper">
+  <div class="prism3d" id="prism">
+    <div class="face">Ни в коем случае не подавайте апелляцию, вам снимут все баллы! Впрочем мы уже передали информацию куда надо.</div>
+    <div class="face">К сожалению баллы вам поставили верно, нет смысла подавать апелляцию. </div>
+    <div class="face">Случай интересный, если правильно оформите заявление, то могут поднять. Удачи!</div>
+    <div class="face">Срочно идите подавать апелляцию, точно поднимут.</div>
+  </div>
+</div>
+
+<p id="finalText"></p>
+</div>
+
+</section>
+
+</main>
+
+<script>
+const input = document.getElementById("fileInput")
+const list = document.getElementById("fileList")
+
+input.addEventListener("change", () => {
+  list.innerHTML=""
+  Array.from(input.files).forEach(file=>{
+    const div=document.createElement("div")
+    div.className="file-item"
+    div.innerText=file.name
+    list.appendChild(div)
+  })
+})
+
+function submitAppeal(){
+  document.getElementById("formBox").style.display="none"
+  document.getElementById("loader").classList.remove("hidden")
+
+  setTimeout(()=>{
+    document.getElementById("loader").classList.add("hidden")
+    document.getElementById("roulette").classList.remove("hidden")
+
+    setTimeout(()=>{
+      document.getElementById("prism").style.animation="none"
+      document.getElementById("finalText").innerText="Удачи в следующем году!"
+    },1600)
+
+  },900)
+}
+</script>
+
+
+</body>
+</html>
